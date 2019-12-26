@@ -340,7 +340,9 @@ fn bit_detangle(tangle: u64) -> (u32, u32) {
 fn bit_rotate(logn: usize, pair: (u32, u32), rx: u32, ry: u32) -> (u32, u32) {
     if ry == 0 {
         if rx != 0 {
-            ((1 << logn) - pair.1 - 1, (1 << logn) - pair.0 - 1)
+            // ((1 << logn) - pair.1 - 1, (1 << logn) - pair.0 - 1)
+            (((1 << logn) as u32).wrapping_sub(pair.1).wrapping_sub(1),
+             ((1 << logn) as u32).wrapping_sub(pair.0).wrapping_sub(1))
         }
         else { (pair.1, pair.0) }
     }
